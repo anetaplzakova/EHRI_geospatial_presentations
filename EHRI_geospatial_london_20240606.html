@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Place, Geography and Geospatial Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="EHRI_geospatial_london_20240606_files/libs/clipboard/clipboard.min.js"></script>
+<script src="EHRI_geospatial_london_20240606_files/libs/quarto-html/quarto.js"></script>
+<script src="EHRI_geospatial_london_20240606_files/libs/quarto-html/popper.min.js"></script>
+<script src="EHRI_geospatial_london_20240606_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="EHRI_geospatial_london_20240606_files/libs/quarto-html/anchor.min.js"></script>
+<link href="EHRI_geospatial_london_20240606_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="EHRI_geospatial_london_20240606_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="EHRI_geospatial_london_20240606_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="EHRI_geospatial_london_20240606_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="EHRI_geospatial_london_20240606_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Place, Geography and Geospatial Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="ehri-geospatial-repository" class="level2">
+<h2 class="anchored" data-anchor-id="ehri-geospatial-repository">EHRI Geospatial Repository</h2>
+<p>Michal Frankl</p>
+<p>Masaryk Institute and Archives, Czech Academy of Sciences</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://ehri.cz/images/ehri-logo.svg" class="img-fluid figure-img"></p>
+<figcaption>EHRI logo</figcaption>
+</figure>
+</div>
+<p>Created in Jupyter notebook.</p>
+</section>
+<section id="maps-in-holocaust-research-and-remembrance" class="level2">
+<h2 class="anchored" data-anchor-id="maps-in-holocaust-research-and-remembrance">Maps in Holocaust Research and Remembrance</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="http://centroshoa.org.uy/wp-content/uploads/2022/07/wiesenthal2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Wiesenthal</figcaption>
+</figure>
+</div>
+<!-- http://centroshoa.org.uy/2022/07/14/vida-y-obra-de-simon-wiesenthal-cuyo-nombre-honra-una-plaza-de-la-ciudad-de-buenos-aires/ -->
+<p>Vienna Wiesenthal Institute for Holocaust Studies</p>
+<p><img src="resources/wiesenthal_museum.jpg" class="img-fluid" alt="Wiesenthal exhibition VWI"> Vienna Wiesenthal Institute for Holocaust Studies</p>
+<p><img src="resources/Szczepan_Eichmann_trial_map.png" class="img-fluid" alt="Eichmann trial"> Eichmann Trial (Szczepan, Aleksandra. ‘Terra Incognita? Othering East-Central Europe in Holocaust Studies’)</p>
+<p><img src="https://dsvfmvr182ibt.cloudfront.net/prod/uploads/2019/08/VIII-A-006-resize_1200x723_acf_cropped.jpg" class="img-fluid" alt="Herbert Froboess"> Herbert Froboess, <em>Deutschland 1945</em> (Wiener Holocauset Library)</p>
+<p><img src="resources/MapEinsatszgruppen1.JPG" class="img-fluid" alt="Gilbert: Einsatzgruppen"> Gilbert, Martin. Atlas of the Holocaust. 3. vyd. Pergamon Press - Steimatzky, 1989.</p>
+<!-- 
+
+- traditional, static maps more pervasive, much more influential
+- closed data, not reproduceable
+- even data produced by the Holocaust Geographies Collaborative only partially available for download (and: web apps age quickly)
+- potential of GIS
+
+-->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://encyclopedia.ushmm.org/images/large/b391b9e6-1b07-4fd8-90e1-83fff5e80a78.gif" class="img-fluid figure-img"></p>
+<figcaption>USHMM Einsatzgruppen</figcaption>
+</figure>
+</div>
+<p>US Holocaust Memorial Museum</p>
+<p><img src="resources/magocsi_ukraine_mass_murder.png" class="img-fluid" alt="Magocsi"> Magocsi, Paul R., and Yohanan Petrovsky-Shtern. Jevreï ta Ukraïnci: tisjačolittja spivisnuvannja. Užhorod: Vydavnyctvo Valerija Padjaka, 2016.</p>
+<p><img src="resources/cesky_historicky_atlas.png" class="img-fluid" alt="Český historický atlas"> “Nazi persecution” in Czech Historical Atlas (http://cha.fsv.cvut.cz/)</p>
+<p><img src="resources/holocaust_atlas_lithuania.png" class="img-fluid" alt="Holocaust Atlas Lithuania"> Holocaust Atlas of Lithuania</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/HGC_budapest.png" class="img-fluid figure-img"></p>
+<figcaption>HGC Budapest</figcaption>
+</figure>
+</div>
+<p>Tim Cole, Alberto Giordano, <em>The Budapest Ghetto dataset</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/budapest_query.png" class="img-fluid figure-img"></p>
+<figcaption>Budapest survivors</figcaption>
+</figure>
+</div>
+<p>Tim Cole, Alberto Giordano, <em>Holocaust Survivors in Budapest dataset</em></p>
+</section>
+<section id="session-overview" class="level2">
+<h2 class="anchored" data-anchor-id="session-overview">Session overview</h2>
+<ul>
+<li>EHRI and the Geospatial Repository</li>
+<li>Hands-on map making and data analysis</li>
+<li>Critical perspectives on geodata and feedback on platform</li>
+</ul>
+</section>
+<section id="ehri-and-geospatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="ehri-and-geospatial-data">EHRI and geospatial data</h2>
+<ul>
+<li>Research infrastructure: provides data and services to researchers</li>
+<li>Launched 2010, will become a permanent, distributed European research infrastructure by early 2025</li>
+<li>Services:
+<ul>
+<li>EHRI Portal (https://portal.ehri-project.eu/)</li>
+<li>EHRI editions</li>
+<li>EHRI Document Blog (https://blog.ehri-project.eu/)</li>
+<li>EHRI Research Guides (https://portal.ehri-project.eu/guides)</li>
+<li>EHRI Dashboard (https://dashboard.ehri-project-stage.eu/)</li>
+<li>EHRI Training site and MOOC</li>
+</ul></li>
+<li>Fellowships and workshops</li>
+<li>Works together with other RIs (especially CLARIN)</li>
+</ul>
+<!-- 
+- broader change in historiography (and humanities more broadly): digital turn
+-->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/EHRI_portal.png" class="img-fluid figure-img"></p>
+<figcaption>EHRI Portal</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/EHRI_early_testimony.png" class="img-fluid figure-img"></p>
+<figcaption>EHRI example early testimony</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/EHRI_blog_NML.png" class="img-fluid figure-img"></p>
+<figcaption>EHRI Document Blog - no man’s land</figcaption>
+</figure>
+</div>
+<section id="ehri-geospatial-repository-1" class="level3">
+<h3 class="anchored" data-anchor-id="ehri-geospatial-repository-1">EHRI Geospatial Repository</h3>
+<ul>
+<li>response to user demands (focus groups, surveys) for data and training</li>
+<li>open data, FAIR principles</li>
+<li>using geospatial standards and services</li>
+<li>versatile, usage agnostic</li>
+<li>launched 2023, still in an early phase</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/EHRI_georepository.png" class="img-fluid figure-img"></p>
+<figcaption>EHRI Georepository</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="search" class="level2">
+<h2 class="anchored" data-anchor-id="search">Search</h2>
+<ul>
+<li>Fulltext search (example: <a href="https://geodata.ehri-project.eu/geonetwork/srv/eng/catalog.search#/search?any=Prague&amp;from=1&amp;to=30">Prague</a></li>
+<li>Facetted browse</li>
+<li>Map selecton</li>
+</ul>
+</section>
+<section id="example-dataset-incidents-in-prague" class="level2">
+<h2 class="anchored" data-anchor-id="example-dataset-incidents-in-prague">Example dataset: <a href="https://geodata.ehri-project.eu/geonetwork/srv/eng/catalog.search#/metadata/71f1b57c-1704-482b-b041-d39cdc29bc30">“Incidents” in Prague</a></h2>
+<ul>
+<li>description</li>
+<li>sources and limits</li>
+<li>structure</li>
+<li>license</li>
+<li>data via standard services</li>
+</ul>
+</section>
+<section id="maps-and-diving-into-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="maps-and-diving-into-datasets">Maps and diving into datasets</h2>
+</section>
+<section id="data-analysis-stolpersteine-in-prague" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis-stolpersteine-in-prague">Data analysis: Stolpersteine in Prague</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://stolpersteinecz.cz/wp-content/uploads/2018/11/Sp%C3%A1len%C3%A1-174-53m-e1637403489977-300x291.jpg" class="img-fluid figure-img"></p>
+<figcaption>Stolpersteine Spálená</figcaption>
+</figure>
+</div>
+<ul>
+<li>Does their spatial distribution correspond to places where Jews lived deportation?</li>
+<li>Is there a preference for spaces identified as “Jewish” or for affluent neighbourhoods?</li>
+</ul>
+<div id="87132e78" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_71805/492149083.py:1: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was too old on your system - pyarrow 10.0.1 is the current minimum supported version as of this release.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd
+/home/michal/.local/lib/python3.10/site-packages/geopandas/_compat.py:112: UserWarning: The Shapely GEOS version (3.10.3-CAPI-1.16.1) is incompatible with the GEOS version PyGEOS was compiled with (3.10.4-CAPI-1.16.2). Conversions between both will be slow.
+  warnings.warn(</code></pre>
+</div>
+</div>
+<div id="55f4718a" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>matplotlib.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">20</span>, <span class="st">'text.color'</span>: <span class="st">'black'</span>, <span class="st">'lines.color'</span>: <span class="st">'black'</span>})</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>matplotlib.rcParams.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>KeysView(RcParams({'_internal.classic_mode': False,
+          'agg.path.chunksize': 0,
+          'animation.bitrate': -1,
+          'animation.codec': 'h264',
+          'animation.convert_args': [],
+          'animation.convert_path': 'convert',
+          'animation.embed_limit': 20.0,
+          'animation.ffmpeg_args': [],
+          'animation.ffmpeg_path': 'ffmpeg',
+          'animation.frame_format': 'png',
+          'animation.html': 'none',
+          'animation.writer': 'ffmpeg',
+          'axes.autolimit_mode': 'data',
+          'axes.axisbelow': 'line',
+          'axes.edgecolor': 'black',
+          'axes.facecolor': 'white',
+          'axes.formatter.limits': [-5, 6],
+          'axes.formatter.min_exponent': 0,
+          'axes.formatter.offset_threshold': 4,
+          'axes.formatter.use_locale': False,
+          'axes.formatter.use_mathtext': False,
+          'axes.formatter.useoffset': True,
+          'axes.grid': False,
+          'axes.grid.axis': 'both',
+          'axes.grid.which': 'major',
+          'axes.labelcolor': 'black',
+          'axes.labelpad': 4.0,
+          'axes.labelsize': 'medium',
+          'axes.labelweight': 'normal',
+          'axes.linewidth': 0.8,
+          'axes.prop_cycle': cycler('color', ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']),
+          'axes.spines.bottom': True,
+          'axes.spines.left': True,
+          'axes.spines.right': True,
+          'axes.spines.top': True,
+          'axes.titlecolor': 'auto',
+          'axes.titlelocation': 'center',
+          'axes.titlepad': 6.0,
+          'axes.titlesize': 'large',
+          'axes.titleweight': 'normal',
+          'axes.titley': None,
+          'axes.unicode_minus': True,
+          'axes.xmargin': 0.05,
+          'axes.ymargin': 0.05,
+          'axes.zmargin': 0.05,
+          'axes3d.grid': True,
+          'backend': 'module://matplotlib_inline.backend_inline',
+          'backend_fallback': True,
+          'boxplot.bootstrap': None,
+          'boxplot.boxprops.color': 'black',
+          'boxplot.boxprops.linestyle': '-',
+          'boxplot.boxprops.linewidth': 1.0,
+          'boxplot.capprops.color': 'black',
+          'boxplot.capprops.linestyle': '-',
+          'boxplot.capprops.linewidth': 1.0,
+          'boxplot.flierprops.color': 'black',
+          'boxplot.flierprops.linestyle': 'none',
+          'boxplot.flierprops.linewidth': 1.0,
+          'boxplot.flierprops.marker': 'o',
+          'boxplot.flierprops.markeredgecolor': 'black',
+          'boxplot.flierprops.markeredgewidth': 1.0,
+          'boxplot.flierprops.markerfacecolor': 'none',
+          'boxplot.flierprops.markersize': 6.0,
+          'boxplot.meanline': False,
+          'boxplot.meanprops.color': 'C2',
+          'boxplot.meanprops.linestyle': '--',
+          'boxplot.meanprops.linewidth': 1.0,
+          'boxplot.meanprops.marker': '^',
+          'boxplot.meanprops.markeredgecolor': 'C2',
+          'boxplot.meanprops.markerfacecolor': 'C2',
+          'boxplot.meanprops.markersize': 6.0,
+          'boxplot.medianprops.color': 'C1',
+          'boxplot.medianprops.linestyle': '-',
+          'boxplot.medianprops.linewidth': 1.0,
+          'boxplot.notch': False,
+          'boxplot.patchartist': False,
+          'boxplot.showbox': True,
+          'boxplot.showcaps': True,
+          'boxplot.showfliers': True,
+          'boxplot.showmeans': False,
+          'boxplot.vertical': True,
+          'boxplot.whiskerprops.color': 'black',
+          'boxplot.whiskerprops.linestyle': '-',
+          'boxplot.whiskerprops.linewidth': 1.0,
+          'boxplot.whiskers': 1.5,
+          'contour.corner_mask': True,
+          'contour.linewidth': None,
+          'contour.negative_linestyle': 'dashed',
+          'date.autoformatter.day': '%Y-%m-%d',
+          'date.autoformatter.hour': '%m-%d %H',
+          'date.autoformatter.microsecond': '%M:%S.%f',
+          'date.autoformatter.minute': '%d %H:%M',
+          'date.autoformatter.month': '%Y-%m',
+          'date.autoformatter.second': '%H:%M:%S',
+          'date.autoformatter.year': '%Y',
+          'date.converter': 'auto',
+          'date.epoch': '1970-01-01T00:00:00',
+          'date.interval_multiples': True,
+          'docstring.hardcopy': False,
+          'errorbar.capsize': 0.0,
+          'figure.autolayout': False,
+          'figure.constrained_layout.h_pad': 0.04167,
+          'figure.constrained_layout.hspace': 0.02,
+          'figure.constrained_layout.use': False,
+          'figure.constrained_layout.w_pad': 0.04167,
+          'figure.constrained_layout.wspace': 0.02,
+          'figure.dpi': 72.0,
+          'figure.edgecolor': (1, 1, 1, 0),
+          'figure.facecolor': (1, 1, 1, 0),
+          'figure.figsize': [6.0, 4.0],
+          'figure.frameon': True,
+          'figure.max_open_warning': 20,
+          'figure.raise_window': True,
+          'figure.subplot.bottom': 0.125,
+          'figure.subplot.hspace': 0.2,
+          'figure.subplot.left': 0.125,
+          'figure.subplot.right': 0.9,
+          'figure.subplot.top': 0.88,
+          'figure.subplot.wspace': 0.2,
+          'figure.titlesize': 'large',
+          'figure.titleweight': 'normal',
+          'font.cursive': ['Apple Chancery',
+                           'Textile',
+                           'Zapf Chancery',
+                           'Sand',
+                           'Script MT',
+                           'Felipa',
+                           'Comic Neue',
+                           'Comic Sans MS',
+                           'cursive'],
+          'font.family': ['sans-serif'],
+          'font.fantasy': ['Chicago',
+                           'Charcoal',
+                           'Impact',
+                           'Western',
+                           'Humor Sans',
+                           'xkcd',
+                           'fantasy'],
+          'font.monospace': ['DejaVu Sans Mono',
+                             'Bitstream Vera Sans Mono',
+                             'Computer Modern Typewriter',
+                             'Andale Mono',
+                             'Nimbus Mono L',
+                             'Courier New',
+                             'Courier',
+                             'Fixed',
+                             'Terminal',
+                             'monospace'],
+          'font.sans-serif': ['DejaVu Sans',
+                              'Bitstream Vera Sans',
+                              'Computer Modern Sans Serif',
+                              'Lucida Grande',
+                              'Verdana',
+                              'Geneva',
+                              'Lucid',
+                              'Arial',
+                              'Helvetica',
+                              'Avant Garde',
+                              'sans-serif'],
+          'font.serif': ['DejaVu Serif',
+                         'Bitstream Vera Serif',
+                         'Computer Modern Roman',
+                         'New Century Schoolbook',
+                         'Century Schoolbook L',
+                         'Utopia',
+                         'ITC Bookman',
+                         'Bookman',
+                         'Nimbus Roman No9 L',
+                         'Times New Roman',
+                         'Times',
+                         'Palatino',
+                         'Charter',
+                         'serif'],
+          'font.size': 20.0,
+          'font.stretch': 'normal',
+          'font.style': 'normal',
+          'font.variant': 'normal',
+          'font.weight': 'normal',
+          'grid.alpha': 1.0,
+          'grid.color': '#b0b0b0',
+          'grid.linestyle': '-',
+          'grid.linewidth': 0.8,
+          'hatch.color': 'black',
+          'hatch.linewidth': 1.0,
+          'hist.bins': 10,
+          'image.aspect': 'equal',
+          'image.cmap': 'viridis',
+          'image.composite_image': True,
+          'image.interpolation': 'antialiased',
+          'image.lut': 256,
+          'image.origin': 'upper',
+          'image.resample': True,
+          'interactive': True,
+          'keymap.back': ['left', 'c', 'backspace', 'MouseButton.BACK'],
+          'keymap.copy': ['ctrl+c', 'cmd+c'],
+          'keymap.forward': ['right', 'v', 'MouseButton.FORWARD'],
+          'keymap.fullscreen': ['f', 'ctrl+f'],
+          'keymap.grid': ['g'],
+          'keymap.grid_minor': ['G'],
+          'keymap.help': ['f1'],
+          'keymap.home': ['h', 'r', 'home'],
+          'keymap.pan': ['p'],
+          'keymap.quit': ['ctrl+w', 'cmd+w', 'q'],
+          'keymap.quit_all': [],
+          'keymap.save': ['s', 'ctrl+s'],
+          'keymap.xscale': ['k', 'L'],
+          'keymap.yscale': ['l'],
+          'keymap.zoom': ['o'],
+          'legend.borderaxespad': 0.5,
+          'legend.borderpad': 0.4,
+          'legend.columnspacing': 2.0,
+          'legend.edgecolor': '0.8',
+          'legend.facecolor': 'inherit',
+          'legend.fancybox': True,
+          'legend.fontsize': 'medium',
+          'legend.framealpha': 0.8,
+          'legend.frameon': True,
+          'legend.handleheight': 0.7,
+          'legend.handlelength': 2.0,
+          'legend.handletextpad': 0.8,
+          'legend.labelcolor': 'None',
+          'legend.labelspacing': 0.5,
+          'legend.loc': 'best',
+          'legend.markerscale': 1.0,
+          'legend.numpoints': 1,
+          'legend.scatterpoints': 1,
+          'legend.shadow': False,
+          'legend.title_fontsize': None,
+          'lines.antialiased': True,
+          'lines.color': 'black',
+          'lines.dash_capstyle': &lt;CapStyle.butt: 'butt'&gt;,
+          'lines.dash_joinstyle': &lt;JoinStyle.round: 'round'&gt;,
+          'lines.dashdot_pattern': [6.4, 1.6, 1.0, 1.6],
+          'lines.dashed_pattern': [3.7, 1.6],
+          'lines.dotted_pattern': [1.0, 1.65],
+          'lines.linestyle': '-',
+          'lines.linewidth': 1.5,
+          'lines.marker': 'None',
+          'lines.markeredgecolor': 'auto',
+          'lines.markeredgewidth': 1.0,
+          'lines.markerfacecolor': 'auto',
+          'lines.markersize': 6.0,
+          'lines.scale_dashes': True,
+          'lines.solid_capstyle': &lt;CapStyle.projecting: 'projecting'&gt;,
+          'lines.solid_joinstyle': &lt;JoinStyle.round: 'round'&gt;,
+          'markers.fillstyle': 'full',
+          'mathtext.bf': 'sans:bold',
+          'mathtext.cal': 'cursive',
+          'mathtext.default': 'it',
+          'mathtext.fallback': 'cm',
+          'mathtext.fontset': 'dejavusans',
+          'mathtext.it': 'sans:italic',
+          'mathtext.rm': 'sans',
+          'mathtext.sf': 'sans',
+          'mathtext.tt': 'monospace',
+          'patch.antialiased': True,
+          'patch.edgecolor': 'black',
+          'patch.facecolor': 'C0',
+          'patch.force_edgecolor': False,
+          'patch.linewidth': 1.0,
+          'path.effects': [],
+          'path.simplify': True,
+          'path.simplify_threshold': 0.111111111111,
+          'path.sketch': None,
+          'path.snap': True,
+          'pcolor.shading': 'auto',
+          'pcolormesh.snap': True,
+          'pdf.compression': 6,
+          'pdf.fonttype': 3,
+          'pdf.inheritcolor': False,
+          'pdf.use14corefonts': False,
+          'pgf.preamble': '',
+          'pgf.rcfonts': True,
+          'pgf.texsystem': 'xelatex',
+          'polaraxes.grid': True,
+          'ps.distiller.res': 6000,
+          'ps.fonttype': 3,
+          'ps.papersize': 'letter',
+          'ps.useafm': False,
+          'ps.usedistiller': None,
+          'savefig.bbox': None,
+          'savefig.directory': '~',
+          'savefig.dpi': 'figure',
+          'savefig.edgecolor': 'auto',
+          'savefig.facecolor': 'auto',
+          'savefig.format': 'png',
+          'savefig.orientation': 'portrait',
+          'savefig.pad_inches': 0.1,
+          'savefig.transparent': False,
+          'scatter.edgecolors': 'face',
+          'scatter.marker': 'o',
+          'svg.fonttype': 'path',
+          'svg.hashsalt': None,
+          'svg.image_inline': True,
+          'text.antialiased': True,
+          'text.color': 'black',
+          'text.hinting': 'force_autohint',
+          'text.hinting_factor': 8,
+          'text.kerning_factor': 0,
+          'text.latex.preamble': '',
+          'text.usetex': False,
+          'timezone': 'UTC',
+          'tk.window_focus': False,
+          'toolbar': 'toolbar2',
+          'webagg.address': '127.0.0.1',
+          'webagg.open_in_browser': True,
+          'webagg.port': 8988,
+          'webagg.port_retries': 50,
+          'xaxis.labellocation': 'center',
+          'xtick.alignment': 'center',
+          'xtick.bottom': True,
+          'xtick.color': 'black',
+          'xtick.direction': 'out',
+          'xtick.labelbottom': True,
+          'xtick.labelcolor': 'inherit',
+          'xtick.labelsize': 'medium',
+          'xtick.labeltop': False,
+          'xtick.major.bottom': True,
+          'xtick.major.pad': 3.5,
+          'xtick.major.size': 3.5,
+          'xtick.major.top': True,
+          'xtick.major.width': 0.8,
+          'xtick.minor.bottom': True,
+          'xtick.minor.pad': 3.4,
+          'xtick.minor.size': 2.0,
+          'xtick.minor.top': True,
+          'xtick.minor.visible': False,
+          'xtick.minor.width': 0.6,
+          'xtick.top': False,
+          'yaxis.labellocation': 'center',
+          'ytick.alignment': 'center_baseline',
+          'ytick.color': 'black',
+          'ytick.direction': 'out',
+          'ytick.labelcolor': 'inherit',
+          'ytick.labelleft': True,
+          'ytick.labelright': False,
+          'ytick.labelsize': 'medium',
+          'ytick.left': True,
+          'ytick.major.left': True,
+          'ytick.major.pad': 3.5,
+          'ytick.major.right': True,
+          'ytick.major.size': 3.5,
+          'ytick.major.width': 0.8,
+          'ytick.minor.left': True,
+          'ytick.minor.pad': 3.4,
+          'ytick.minor.right': True,
+          'ytick.minor.size': 2.0,
+          'ytick.minor.visible': False,
+          'ytick.minor.width': 0.6,
+          'ytick.right': False}))</code></pre>
+</div>
+</div>
+<section id="load-borders-of-historical-districts" class="level3">
+<h3 class="anchored" data-anchor-id="load-borders-of-historical-districts">Load borders of historical districts</h3>
+<div id="00716094" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;fragment&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>districts <span class="op">=</span> gpd.read_file(<span class="st">"data/MGS-prague_districts_borders-v1.gpkg"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>districts <span class="op">=</span> districts.to_crs((<span class="st">"EPSG:4326"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>districts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">quarter_cs</th>
+<th data-quarto-table-cell-role="th">quarter_en</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>9</td>
+<td>Praha VIII</td>
+<td>Prague VIII</td>
+<td>POLYGON ((14.48048 50.11761, 14.48087 50.11763...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>11</td>
+<td>Praha XI</td>
+<td>Prague XI</td>
+<td>POLYGON ((14.53125 50.08599, 14.53158 50.08534...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>13</td>
+<td>Praha XIII</td>
+<td>Prague XIII</td>
+<td>POLYGON ((14.52331 50.07385, 14.52381 50.07396...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>15</td>
+<td>Praha XIX</td>
+<td>Prague XIX</td>
+<td>POLYGON ((14.33188 50.10859, 14.33202 50.10846...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>19</td>
+<td>Praha XVIII</td>
+<td>Prague XVIII</td>
+<td>POLYGON ((14.38049 50.07941, 14.38022 50.07944...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>14</td>
+<td>Praha XIV</td>
+<td>Prague XIV</td>
+<td>POLYGON ((14.46099 50.02918, 14.46127 50.02883...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>17</td>
+<td>Praha XVI</td>
+<td>Prague XVI</td>
+<td>POLYGON ((14.39799 50.02853, 14.39907 50.02832...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>18</td>
+<td>Praha XVII</td>
+<td>Prague XVII</td>
+<td>POLYGON ((14.37808 50.06377, 14.37867 50.06388...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>1</td>
+<td>Praha I</td>
+<td>Prague I</td>
+<td>POLYGON ((14.41035 50.07903, 14.41014 50.07919...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>3</td>
+<td>Praha III</td>
+<td>Prague III</td>
+<td>POLYGON ((14.40922 50.09266, 14.40942 50.09265...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>4</td>
+<td>Praha IV</td>
+<td>Prague IV</td>
+<td>POLYGON ((14.40922 50.09266, 14.40936 50.09288...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>6</td>
+<td>Praha V</td>
+<td>Prague V</td>
+<td>POLYGON ((14.41824 50.09165, 14.41844 50.09139...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>7</td>
+<td>Praha VI</td>
+<td>Prague VI</td>
+<td>POLYGON ((14.42112 50.06798, 14.42144 50.06749...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>8</td>
+<td>Praha VII</td>
+<td>Prague VII</td>
+<td>POLYGON ((14.42520 50.11531, 14.42666 50.11496...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>10</td>
+<td>Praha X</td>
+<td>Prague X</td>
+<td>POLYGON ((14.46374 50.09835, 14.46424 50.09753...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>12</td>
+<td>Praha XII</td>
+<td>Prague XII</td>
+<td>POLYGON ((14.43926 50.08598, 14.44041 50.08545...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>2</td>
+<td>Praha II</td>
+<td>Prague II</td>
+<td>POLYGON ((14.42677 50.09519, 14.42739 50.09525...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>16</td>
+<td>Praha XV</td>
+<td>Prague XV</td>
+<td>POLYGON ((14.44608 50.02608, 14.44642 50.02638...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="b9ce919e" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>districts.plot(facecolor<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">'grey'</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">18</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="load-dataset-with-places-of-residence-of-jews-in-prague" class="level3">
+<h3 class="anchored" data-anchor-id="load-dataset-with-places-of-residence-of-jews-in-prague">Load dataset with places of residence of Jews in Prague</h3>
+<div id="8625c4e0" class="cell" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;fragment&quot;}" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>houses <span class="op">=</span> gpd.read_file(<span class="st">"data/MGS-prague_jewish_residency_during_occupation-v1-eng.gpkg"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>houses.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">address_de</th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">murdered</th>
+<th data-quarto-table-cell-role="th">survived</th>
+<th data-quarto-table-cell-role="th">fate_unknown</th>
+<th data-quarto-table-cell-role="th">present_1942-01-01</th>
+<th data-quarto-table-cell-role="th">present_1943-01-01</th>
+<th data-quarto-table-cell-role="th">present_1944-01-01</th>
+<th data-quarto-table-cell-role="th">present_1945-01-01</th>
+<th data-quarto-table-cell-role="th">present_1945-05-09</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Prague XIV, Budějovická 93</td>
+<td>Prag XIV, Budweiser Strasse 93</td>
+<td>4.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>POINT (14.45749 50.03868)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Prague XIV, Nová cesta 9/510</td>
+<td>Prag XIV, Neuer Weg 9/510</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>POINT (14.43475 50.03913)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Prague XV, Branická 19/722</td>
+<td>Prag XV, Braniker Strasse 19/722</td>
+<td>13.0</td>
+<td>10.0</td>
+<td>0.0</td>
+<td>3.0</td>
+<td>7.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>POINT (14.41132 50.03950)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Prague XIV, K Habrovce 85</td>
+<td>Prag XIV, Zu den Hainbuchen 85</td>
+<td>6.0</td>
+<td>6.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>5.0</td>
+<td>2.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>POINT (14.45105 50.04095)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Prague XIII, Jihozápadní IV 2321</td>
+<td>Prag XIII, Südweststrasse 2321</td>
+<td>5.0</td>
+<td>5.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>4.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>POINT (14.47943 50.04131)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f683dc04" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install mapclassify</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Defaulting to user installation because normal site-packages is not writeable
+Collecting mapclassify
+  Downloading mapclassify-2.6.1-py3-none-any.whl (38 kB)
+Requirement already satisfied: networkx&gt;=2.7 in /home/michal/.local/lib/python3.10/site-packages (from mapclassify) (3.1)
+Requirement already satisfied: scipy&gt;=1.8 in /usr/lib/python3/dist-packages (from mapclassify) (1.8.0)
+Requirement already satisfied: pandas!=1.5.0,&gt;=1.4 in /home/michal/.local/lib/python3.10/site-packages (from mapclassify) (2.2.0)
+Requirement already satisfied: numpy&gt;=1.23 in /home/michal/.local/lib/python3.10/site-packages (from mapclassify) (1.26.4)
+Requirement already satisfied: scikit-learn&gt;=1.0 in /home/michal/.local/lib/python3.10/site-packages (from mapclassify) (1.4.1.post1)
+Requirement already satisfied: tzdata&gt;=2022.7 in /home/michal/.local/lib/python3.10/site-packages (from pandas!=1.5.0,&gt;=1.4-&gt;mapclassify) (2024.1)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/michal/.local/lib/python3.10/site-packages (from pandas!=1.5.0,&gt;=1.4-&gt;mapclassify) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/lib/python3/dist-packages (from pandas!=1.5.0,&gt;=1.4-&gt;mapclassify) (2022.1)
+Requirement already satisfied: joblib&gt;=1.2.0 in /home/michal/.local/lib/python3.10/site-packages (from scikit-learn&gt;=1.0-&gt;mapclassify) (1.3.2)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /home/michal/.local/lib/python3.10/site-packages (from scikit-learn&gt;=1.0-&gt;mapclassify) (3.3.0)
+Requirement already satisfied: six&gt;=1.5 in /usr/lib/python3/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas!=1.5.0,&gt;=1.4-&gt;mapclassify) (1.16.0)
+Installing collected packages: mapclassify
+Successfully installed mapclassify-2.6.1</code></pre>
+</div>
+</div>
+<div id="1bf788d1" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">14</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>districts.plot(facecolor<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">'grey'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>houses.plot(cmap<span class="op">=</span><span class="st">"OrRd"</span>, column<span class="op">=</span><span class="st">"murdered"</span>, scheme<span class="op">=</span><span class="st">"Quantiles"</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="load-stolpersteine-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="load-stolpersteine-dataset">Load Stolpersteine dataset</h3>
+<div id="f5bf870d" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;fragment&quot;}" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stolpersteine <span class="op">=</span> gpd.read_file(<span class="st">"data/STS-stolpersteine_prague-v2_20230930.gpkg"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>stolpersteine <span class="op">=</span> stolpersteine.to_crs(<span class="st">"EPSG:4326"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>stolpersteine.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">person</th>
+<th data-quarto-table-cell-role="th">address_cs</th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_cs</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_en</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_cs</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_en</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Pollaková Eva Mia (* 1924)</td>
+<td>Praha 1, 17. listopadu 207/6</td>
+<td>Prague 1, 17. listopadu 207/6</td>
+<td>http://stolpersteinecz.cz/mia-pollakova</td>
+<td>http://stolpersteinecz.cz/en/mia-pollakova</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/1...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+<td>POINT (14.41754 50.09120)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Pollaková Vilma (* 1897)</td>
+<td>Praha 1, 17. listopadu 207/6</td>
+<td>Prague 1, 17. listopadu 207/6</td>
+<td>http://stolpersteinecz.cz/vilma-pollakova</td>
+<td>http://stolpersteinecz.cz/en/vilma-pollakova/</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/1...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+<td>POINT (14.41754 50.09120)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Fahnová Helena (* 1919)</td>
+<td>Praha 1, 17. listopadu 4-6</td>
+<td>Prague 1, 17. listopadu 4-6</td>
+<td>http://stolpersteinecz.cz/fahnova-helena</td>
+<td>http://stolpersteinecz.cz/en/fahnova-helena</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/8...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+<td>POINT (14.41769 50.09129)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Fahn Karel (* 1914)</td>
+<td>Praha 1, 17. listopadu 4-6</td>
+<td>Prague 1, 17. listopadu 4-6</td>
+<td>http://stolpersteinecz.cz/fahn-karel</td>
+<td>http://stolpersteinecz.cz/en/fahn-karel</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/8...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+<td>POINT (14.41769 50.09129)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Markusová Berta (* 1887)</td>
+<td>Praha 1, 17. listopadu 4-6</td>
+<td>Prague 1, 17. listopadu 4-6</td>
+<td>http://stolpersteinecz.cz/markusova-berta-roz-...</td>
+<td>http://stolpersteinecz.cz/en/markusova-berta-r...</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/1...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+<td>POINT (14.41769 50.09129)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="eb7561ac" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(stolpersteine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>591</code></pre>
+</div>
+</div>
+<div id="b348ed30" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">18</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>stolpersteine.plot(ax<span class="op">=</span>ax)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>districts.plot(facecolor<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">'grey'</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="9fb63778" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dh <span class="op">=</span> districts.sjoin(houses, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dh.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">quarter_cs</th>
+<th data-quarto-table-cell-role="th">quarter_en</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">index_right</th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">address_de</th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">murdered</th>
+<th data-quarto-table-cell-role="th">survived</th>
+<th data-quarto-table-cell-role="th">fate_unknown</th>
+<th data-quarto-table-cell-role="th">present_1942-01-01</th>
+<th data-quarto-table-cell-role="th">present_1943-01-01</th>
+<th data-quarto-table-cell-role="th">present_1944-01-01</th>
+<th data-quarto-table-cell-role="th">present_1945-01-01</th>
+<th data-quarto-table-cell-role="th">present_1945-05-09</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>6540</td>
+<td>Prague IX, Šikmá 4</td>
+<td>Prag IX, Zwerchgasse 4</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>2.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>6566</td>
+<td>Prague IX, Šikmá 438</td>
+<td>Prag IX, Zwerchgasse 438</td>
+<td>2.0</td>
+<td>2.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>2.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>6580</td>
+<td>Prague IX, V Domově 436</td>
+<td>Prag IX, Heimstättenweg 436</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>6698</td>
+<td>Prague XI, Šikmá 315</td>
+<td>Prag XI, Zwerchgasse 315</td>
+<td>8.0</td>
+<td>8.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>4.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>6990</td>
+<td>Prague IX, Novovysočanská 619</td>
+<td>Prag IX, Neu-Wissotschaner Strasse 619</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="59521ce0" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dhgrouped <span class="op">=</span> dh[[<span class="st">"quarter_en"</span>, <span class="st">"murdered"</span>]].groupby([<span class="st">'quarter_en'</span>]).<span class="bu">sum</span>([<span class="st">'murdered'</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dhgrouped.plot(kind <span class="op">=</span> <span class="st">"barh"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="139fdc73" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> districts.sjoin(stolpersteine, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id_left</th>
+<th data-quarto-table-cell-role="th">quarter_cs</th>
+<th data-quarto-table-cell-role="th">quarter_en</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">index_right</th>
+<th data-quarto-table-cell-role="th">id_right</th>
+<th data-quarto-table-cell-role="th">person</th>
+<th data-quarto-table-cell-role="th">address_cs</th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_cs</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_en</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_cs</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_en</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>251.0</td>
+<td>252</td>
+<td>Blechová Růžena (* 1895)</td>
+<td>Praha 9, Na Břehu 298</td>
+<td>Prague 9, Na Břehu 298</td>
+<td>http://stolpersteinecz.cz/blechova-ruzena</td>
+<td>http://stolpersteinecz.cz/en/blechova-ruzena</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/7...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>250.0</td>
+<td>251</td>
+<td>Blecha Jaroslav (* 1912)</td>
+<td>Praha 9, Na Břehu 298</td>
+<td>Prague 9, Na Břehu 298</td>
+<td>http://stolpersteinecz.cz/blecha-jaroslav</td>
+<td>http://stolpersteinecz.cz/en/blecha-jaroslav</td>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5</td>
+<td>Praha IX</td>
+<td>Prague IX</td>
+<td>POLYGON ((14.54171 50.11815, 14.54262 50.12005...</td>
+<td>334.0</td>
+<td>336</td>
+<td>Králová Selma (* 1885)</td>
+<td>Praha 9, Pod Pekárnami 878/2</td>
+<td>Prague 9, Pod Pekárnami 878/2</td>
+<td>http://stolpersteinecz.cz/kralova-selma-roz-sr...</td>
+<td>http://stolpersteinecz.cz/en/kralova-selma-roz...</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/1...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>9</td>
+<td>Praha VIII</td>
+<td>Prague VIII</td>
+<td>POLYGON ((14.48048 50.11761, 14.48087 50.11763...</td>
+<td>434.0</td>
+<td>441</td>
+<td>Lustig Emil (* 1892)</td>
+<td>Praha 8, Sokolovská 428/137</td>
+<td>Prague 8, Sokolovská 428/137</td>
+<td>http://stolpersteinecz.cz/emil-lustig</td>
+<td>http://stolpersteinecz.cz/en/emil-lustig</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/1...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>9</td>
+<td>Praha VIII</td>
+<td>Prague VIII</td>
+<td>POLYGON ((14.48048 50.11761, 14.48087 50.11763...</td>
+<td>457.0</td>
+<td>464</td>
+<td>Löw Otakar (* 1894)</td>
+<td>Praha 8, Světova 498/3</td>
+<td>Prague 8, Světova 498/3</td>
+<td>http://stolpersteinecz.cz/otakar-low</td>
+<td>http://stolpersteinecz.cz/en/otakar-low</td>
+<td>https://www.holocaust.cz/databaze-obeti/obet/1...</td>
+<td>https://www.holocaust.cz/en/database-of-victim...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="e4c60a20" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dsgrouped <span class="op">=</span> ds[[<span class="st">"quarter_en"</span>]].groupby([<span class="st">'quarter_en'</span>])[<span class="st">'quarter_en'</span>].count()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dsgrouped.plot(kind<span class="op">=</span><span class="st">"barh"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="b859ab4c" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>hs <span class="op">=</span> dhgrouped.join(dsgrouped, on<span class="op">=</span><span class="st">"quarter_en"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>hs.rename({<span class="st">'quarter_en'</span>: <span class="st">'stolpersteine'</span>}, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>hs[<span class="st">'proportion'</span>] <span class="op">=</span> hs[<span class="st">'stolpersteine'</span>] <span class="op">/</span> hs[<span class="st">'murdered'</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>hs.sort_values([<span class="st">'proportion'</span>], ascending<span class="op">=</span>[<span class="va">False</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">murdered</th>
+<th data-quarto-table-cell-role="th">stolpersteine</th>
+<th data-quarto-table-cell-role="th">proportion</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">quarter_en</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague XIX</td>
+<td>544.0</td>
+<td>54</td>
+<td>0.099265</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague VII</td>
+<td>1493.0</td>
+<td>50</td>
+<td>0.033490</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague III</td>
+<td>111.0</td>
+<td>3</td>
+<td>0.027027</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague XV</td>
+<td>238.0</td>
+<td>6</td>
+<td>0.025210</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague XIV</td>
+<td>884.0</td>
+<td>21</td>
+<td>0.023756</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague VI</td>
+<td>44.0</td>
+<td>1</td>
+<td>0.022727</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague IX</td>
+<td>134.0</td>
+<td>3</td>
+<td>0.022388</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague II</td>
+<td>5659.0</td>
+<td>123</td>
+<td>0.021735</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague V</td>
+<td>1692.0</td>
+<td>33</td>
+<td>0.019504</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague XII</td>
+<td>7001.0</td>
+<td>134</td>
+<td>0.019140</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague XVI</td>
+<td>654.0</td>
+<td>11</td>
+<td>0.016820</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague XVIII</td>
+<td>192.0</td>
+<td>3</td>
+<td>0.015625</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague IV</td>
+<td>70.0</td>
+<td>1</td>
+<td>0.014286</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague I</td>
+<td>5543.0</td>
+<td>77</td>
+<td>0.013891</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague X</td>
+<td>1975.0</td>
+<td>23</td>
+<td>0.011646</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague VIII</td>
+<td>807.0</td>
+<td>8</td>
+<td>0.009913</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague XI</td>
+<td>2248.0</td>
+<td>19</td>
+<td>0.008452</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prague XIII</td>
+<td>2022.0</td>
+<td>17</td>
+<td>0.008408</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Prague XVII</td>
+<td>122.0</td>
+<td>1</td>
+<td>0.008197</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="04e375cf" class="cell" data-scrolled="false" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>diststat <span class="op">=</span> districts.merge(hs, on<span class="op">=</span><span class="st">'quarter_en'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>diststat[(diststat[<span class="st">"murdered"</span>]<span class="op">&gt;</span><span class="dv">0</span>)].plot(cmap<span class="op">=</span><span class="st">"OrRd"</span>, column<span class="op">=</span><span class="st">"proportion"</span>, legend<span class="op">=</span><span class="dv">1</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>diststat.<span class="bu">apply</span>(<span class="kw">lambda</span> x: ax.annotate(text<span class="op">=</span>x[<span class="st">'quarter_en'</span>], xy<span class="op">=</span>x.geometry.centroid.coords[<span class="dv">0</span>], ha<span class="op">=</span><span class="st">'center'</span>),axis<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span> <span class="co">#  + ': ' + str(x['stolpersteine']) + '/' + str(x['murdered'])</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>districts.plot(facecolor<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">'grey'</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s try grid data analysis…</p>
+<p>Gridding adapted from: James Brennan, <a href="https://james-brennan.github.io/posts/fast_gridding_geopandas/">Fast and easy gridding of point data with geopandas</a></p>
+<div id="99252c90" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shapely</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># total area for the grid</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>xmin, ymin, xmax, ymax<span class="op">=</span> districts.total_bounds</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># how many cells across and down</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>n_cells<span class="op">=</span><span class="dv">80</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>cell_size <span class="op">=</span> (xmax<span class="op">-</span>xmin)<span class="op">/</span>n_cells</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># projection of the grid</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>crs <span class="op">=</span> <span class="st">"EPSG:4326"</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># create the cells in a loop</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>grid_cells <span class="op">=</span> []</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0 <span class="kw">in</span> np.arange(xmin, xmax<span class="op">+</span>cell_size, cell_size ):</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> y0 <span class="kw">in</span> np.arange(ymin, ymax<span class="op">+</span>cell_size, cell_size):</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># bounds</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        x1 <span class="op">=</span> x0<span class="op">-</span>cell_size</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        y1 <span class="op">=</span> y0<span class="op">+</span>cell_size</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        grid_cells.append( shapely.geometry.box(x0, y0, x1, y1) )</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>cell <span class="op">=</span> gpd.GeoDataFrame(grid_cells, columns<span class="op">=</span>[<span class="st">'geometry'</span>], crs<span class="op">=</span>crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2b739c2a" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cell <span class="op">=</span> cell.assign(gridid<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(cell)))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">gridid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>POLYGON ((14.28936 50.00880, 14.28936 50.01218...</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>POLYGON ((14.28936 50.01218, 14.28936 50.01555...</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>POLYGON ((14.28936 50.01555, 14.28936 50.01893...</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>POLYGON ((14.28936 50.01893, 14.28936 50.02231...</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>POLYGON ((14.28936 50.02231, 14.28936 50.02569...</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3478</td>
+<td>POLYGON ((14.55953 50.13713, 14.55953 50.14051...</td>
+<td>3478</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3479</td>
+<td>POLYGON ((14.55953 50.14051, 14.55953 50.14389...</td>
+<td>3479</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3480</td>
+<td>POLYGON ((14.55953 50.14389, 14.55953 50.14726...</td>
+<td>3480</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3481</td>
+<td>POLYGON ((14.55953 50.14726, 14.55953 50.15064...</td>
+<td>3481</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3482</td>
+<td>POLYGON ((14.55953 50.15064, 14.55953 50.15402...</td>
+<td>3482</td>
+</tr>
+</tbody>
+</table>
+
+<p>3483 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="5a96ef3d" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gridh <span class="op">=</span> cell.sjoin(houses, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>gridh[gridh.murdered <span class="op">&gt;</span> <span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">gridid</th>
+<th data-quarto-table-cell-role="th">index_right</th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">address_de</th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">murdered</th>
+<th data-quarto-table-cell-role="th">survived</th>
+<th data-quarto-table-cell-role="th">fate_unknown</th>
+<th data-quarto-table-cell-role="th">present_1942-01-01</th>
+<th data-quarto-table-cell-role="th">present_1943-01-01</th>
+<th data-quarto-table-cell-role="th">present_1944-01-01</th>
+<th data-quarto-table-cell-role="th">present_1945-01-01</th>
+<th data-quarto-table-cell-role="th">present_1945-05-09</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">453</td>
+<td>POLYGON ((14.32314 50.08647, 14.32314 50.08985...</td>
+<td>453</td>
+<td>5584.0</td>
+<td>Prague X, Rakovnická 1</td>
+<td>Prag X, Rakonitzer Gasse 1</td>
+<td>22.0</td>
+<td>18.0</td>
+<td>3.0</td>
+<td>1.0</td>
+<td>10.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1264</td>
+<td>POLYGON ((14.38730 50.06621, 14.38730 50.06959...</td>
+<td>1264</td>
+<td>2257.0</td>
+<td>Prague XVI, Na Popelce 160</td>
+<td>Prag XVI, Popelhofweg 160</td>
+<td>17.0</td>
+<td>13.0</td>
+<td>1.0</td>
+<td>3.0</td>
+<td>10.0</td>
+<td>2.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1349</td>
+<td>POLYGON ((14.39406 50.06283, 14.39406 50.06621...</td>
+<td>1349</td>
+<td>2001.0</td>
+<td>Prague XVI, Na Březince 17</td>
+<td>Prag XVI, Birkicht 17</td>
+<td>14.0</td>
+<td>13.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>10.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1444</td>
+<td>POLYGON ((14.40081 50.09323, 14.40081 50.09661...</td>
+<td>1444</td>
+<td>1033.0</td>
+<td>Prague IV, Letenská 300</td>
+<td>Prag IV, Sommerbergstrasse 300</td>
+<td>35.0</td>
+<td>24.0</td>
+<td>10.0</td>
+<td>1.0</td>
+<td>33.0</td>
+<td>6.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1523</td>
+<td>POLYGON ((14.40756 50.06959, 14.40756 50.07297...</td>
+<td>1523</td>
+<td>154.0</td>
+<td>Prague XVI, Brokoffova 11</td>
+<td>Prag XVI, Brokoffstrasse 11</td>
+<td>12.0</td>
+<td>11.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>9.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2597</td>
+<td>POLYGON ((14.49199 50.06621, 14.49199 50.06959...</td>
+<td>2597</td>
+<td>2056.0</td>
+<td>Prague XIII, Radešovická 1331</td>
+<td>Prag XIII, Radeschowitzer Strasse 1331</td>
+<td>19.0</td>
+<td>18.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>14.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2652</td>
+<td>POLYGON ((14.49537 50.10674, 14.49537 50.11011...</td>
+<td>2652</td>
+<td>1166.0</td>
+<td>Prague X, Královská 13/17</td>
+<td>Prag X, Königsstrasse 13/17</td>
+<td>18.0</td>
+<td>15.0</td>
+<td>2.0</td>
+<td>1.0</td>
+<td>6.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2729</td>
+<td>POLYGON ((14.50212 50.07634, 14.50212 50.07972...</td>
+<td>2729</td>
+<td>4255.0</td>
+<td>Prague XIII, Vykáňská 1444</td>
+<td>Prag XIII, Wikaner Strasse 1444</td>
+<td>21.0</td>
+<td>17.0</td>
+<td>0.0</td>
+<td>4.0</td>
+<td>13.0</td>
+<td>4.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2729</td>
+<td>POLYGON ((14.50212 50.07634, 14.50212 50.07972...</td>
+<td>2729</td>
+<td>4301.0</td>
+<td>Prague XIII, Vykáňská 1443</td>
+<td>Prag XIII, Wikaner Strasse 1443</td>
+<td>16.0</td>
+<td>13.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>14.0</td>
+<td>8.0</td>
+<td>2.0</td>
+<td>2.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2772</td>
+<td>POLYGON ((14.50550 50.07634, 14.50550 50.07972...</td>
+<td>2772</td>
+<td>424.0</td>
+<td>Prague XIII, Černická 8/493</td>
+<td>Prag XIII, Tschernitzer Strasse 8/493</td>
+<td>12.0</td>
+<td>11.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>11.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>735 rows × 14 columns</p>
+</div>
+</div>
+</div>
+<div id="84b1024a" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gridh2 <span class="op">=</span> gridh.groupby(<span class="st">'gridid'</span>).<span class="bu">sum</span>(<span class="st">"murdered"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f6ce1f15" class="cell" data-scrolled="false" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gridh3 <span class="op">=</span> cell.join(gridh2, on<span class="op">=</span><span class="st">"gridid"</span>, how<span class="op">=</span><span class="st">"inner"</span>, rsuffix<span class="op">=</span><span class="st">"_right"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>gridh3.plot(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>), cmap<span class="op">=</span><span class="st">"OrRd"</span>, column<span class="op">=</span><span class="st">"murdered"</span>, legend<span class="op">=</span><span class="dv">1</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>districts.plot(facecolor<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">'grey'</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="daa2fa63" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>grids <span class="op">=</span> cell.sjoin(stolpersteine, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>grids</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">gridid</th>
+<th data-quarto-table-cell-role="th">index_right</th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">person</th>
+<th data-quarto-table-cell-role="th">address_cs</th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_cs</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_en</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_cs</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_en</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>POLYGON ((14.28936 50.00880, 14.28936 50.01218...</td>
+<td>0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>POLYGON ((14.28936 50.01218, 14.28936 50.01555...</td>
+<td>1</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>POLYGON ((14.28936 50.01555, 14.28936 50.01893...</td>
+<td>2</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>POLYGON ((14.28936 50.01893, 14.28936 50.02231...</td>
+<td>3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>POLYGON ((14.28936 50.02231, 14.28936 50.02569...</td>
+<td>4</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3478</td>
+<td>POLYGON ((14.55953 50.13713, 14.55953 50.14051...</td>
+<td>3478</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3479</td>
+<td>POLYGON ((14.55953 50.14051, 14.55953 50.14389...</td>
+<td>3479</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3480</td>
+<td>POLYGON ((14.55953 50.14389, 14.55953 50.14726...</td>
+<td>3480</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3481</td>
+<td>POLYGON ((14.55953 50.14726, 14.55953 50.15064...</td>
+<td>3481</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3482</td>
+<td>POLYGON ((14.55953 50.15064, 14.55953 50.15402...</td>
+<td>3482</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>3941 rows × 11 columns</p>
+</div>
+</div>
+</div>
+<div id="7ec84fe0" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>grids2 <span class="op">=</span> grids.groupby(<span class="st">'gridid'</span>).count()</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>grids2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">index_right</th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">person</th>
+<th data-quarto-table-cell-role="th">address_cs</th>
+<th data-quarto-table-cell-role="th">address_en</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_cs</th>
+<th data-quarto-table-cell-role="th">link_stolpersteine_en</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_cs</th>
+<th data-quarto-table-cell-role="th">link_holocaustcz_en</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">gridid</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3478</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3479</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3480</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3481</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3482</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>3483 rows × 10 columns</p>
+</div>
+</div>
+</div>
+<div id="27e0b913" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grids3 <span class="op">=</span> cell.join(grids2, on<span class="op">=</span><span class="st">"gridid"</span>, how<span class="op">=</span><span class="st">"inner"</span>, rsuffix<span class="op">=</span><span class="st">"_right"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>grids3.plot(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>), column<span class="op">=</span><span class="st">"geometry_right"</span>, cmap<span class="op">=</span><span class="st">"OrRd"</span>, legend<span class="op">=</span><span class="dv">1</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>districts.plot(facecolor<span class="op">=</span><span class="st">"none"</span>, edgecolor<span class="op">=</span><span class="st">'grey'</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="650fd797" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="113">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">12</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>gridh3.plot(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>), cmap<span class="op">=</span><span class="st">"OrRd"</span>, column<span class="op">=</span><span class="st">"murdered"</span>, legend<span class="op">=</span><span class="dv">1</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>])</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>grids3.plot(figsize <span class="op">=</span> (<span class="dv">28</span>, <span class="dv">20</span>), column<span class="op">=</span><span class="st">"geometry_right"</span>, cmap<span class="op">=</span><span class="st">"OrRd"</span>, legend<span class="op">=</span><span class="dv">1</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EHRI_geospatial_london_20240606_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<ul>
+<li>What critical approaches to data and GIS mean for a repository
+<ul>
+<li>How to combine need for data and destabilise outdated perspectives on place and space, maps and mapping?</li>
+</ul></li>
+<li>Feedback on repository
+<ul>
+<li>What didn’t work?</li>
+<li>What support needed?</li>
+<li>Would you contribute?</li>
+<li>Anything else?</li>
+</ul></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
